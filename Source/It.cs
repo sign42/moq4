@@ -128,7 +128,7 @@ namespace Moq
 			var re = new Regex(regex);
 
 			// But evaluated every time :)
-			return Match<string>.Create(value => re.IsMatch(value), () => It.IsRegex(regex));
+			return Match<string>.Create(value => value == null ? false : re.IsMatch(value), () => It.IsRegex(regex));
 		}
 
 		/// <include file='It.xdoc' path='docs/doc[@for="It.IsRegex(regex,options)"]/*'/>
@@ -138,7 +138,7 @@ namespace Moq
 			var re = new Regex(regex, options);
 
 			// But evaluated every time :)
-			return Match<string>.Create(value => re.IsMatch(value), () => It.IsRegex(regex, options));
+			return Match<string>.Create(value => value == null ? false : re.IsMatch(value), () => It.IsRegex(regex, options));
 		}
 	}
 }

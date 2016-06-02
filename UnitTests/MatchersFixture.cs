@@ -184,6 +184,22 @@ namespace Moq.Tests
 		}
 
 		[Fact]
+		public void RegexHandlesNull() {
+			var mock = new Mock<IFoo>();
+			mock.Setup(x => x.Execute(It.IsRegex(".*"))).Returns("something");
+			mock.Setup(x => x.Execute(null)).Returns("");
+			Assert.Equal("", mock.Object.Execute(null));
+		}
+
+		[Fact]
+		public void RegexHandlesNullWithOptions() {
+			var mock = new Mock<IFoo>();
+			mock.Setup(x => x.Execute(It.IsRegex(".*", RegexOptions.IgnoreCase))).Returns("something");
+			mock.Setup(x => x.Execute(null)).Returns("");
+			Assert.Equal("", mock.Object.Execute(null));
+		}
+
+		[Fact]
 		public void MatchesEvenNumbersWithLambdaMatching()
 		{
 			var mock = new Mock<IFoo>();
